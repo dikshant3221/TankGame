@@ -23,7 +23,7 @@ export class Wall {
    * @returns PIXI.Sprite - The created wall sprite.
    */
   private createWallSprite(x: number, y: number): PIXI.Sprite {
-    const sprite = PIXI.Sprite.from("assets/wall.png");
+    const sprite = PIXI.Sprite.from("assets/images/wall.png");
     sprite.anchor.set(0.5); 
     sprite.width = 44; 
     sprite.height = 22; 

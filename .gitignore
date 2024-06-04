@@ -34,14 +34,4 @@ yarn.lock
 .idea/
 .vscode/
 
-# Cocos Creator assets
-assets/resources/*
-!assets/resources/**/*.meta
-assets/sounds/*
-!assets/sounds/**/*.meta
-assets/texture/*
-!assets/texture/**/*.meta
-assets/prefab/*
-!assets/prefab/**/*.meta
-assets/scene/*
-!assets/scene/**/*.meta
+

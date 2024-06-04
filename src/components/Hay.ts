@@ -30,7 +30,7 @@ export class Hay {
    * @returns PIXI.Sprite - The created hay sprite.
    */
   private createSprite(x: number, y: number): PIXI.Sprite {
-    const sprite = PIXI.Sprite.from("assets/hay.png");
+    const sprite = PIXI.Sprite.from("assets/images/hay.png");
     sprite.anchor.set(0.5);
     sprite.x = x;
     sprite.y = y;

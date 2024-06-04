@@ -14,6 +14,7 @@ export class Tank {
   public initialCameraX: number;
   public initialCameraY: number;
   public stepCounter: number = 0;
+  private currentDirection = "right";
 
   /**
    * Creates an instance of Tank.
@@ -23,7 +24,13 @@ export class Tank {
    * @param bulletCount - The number of bullets fired at once.
    * @param game - The game instance.
    */
-  constructor(app: PIXI.Application, color: string, damage: number, bulletCount: number, game: Game) {
+  constructor(
+    app: PIXI.Application,
+    color: string,
+    damage: number,
+    bulletCount: number,
+    game: Game
+  ) {
     this.app = app;
     this.damage = damage;
     this.bulletCount = bulletCount;
@@ -41,7 +48,7 @@ export class Tank {
    * @returns PIXI.Sprite - The created tank sprite.
    */
   private createTankSprite(color: string): PIXI.Sprite {
-    const sprite = PIXI.Sprite.from(`assets/tank_${color}.png`);
+    const sprite = PIXI.Sprite.from(`assets/images/tank_${color}.png`);
     if (color === "green") {
       sprite.scale.set(-1, 1); // Flip the green tank
     }
@@ -56,6 +63,7 @@ export class Tank {
    */
   public moveUp(): void {
     this.moveTank(0, -25, -Math.PI / 2);
+    this.currentDirection = "up";
   }
 
   /**
@@ -63,13 +71,18 @@ export class Tank {
    */
   public moveDown(): void {
     this.moveTank(0, 25, Math.PI / 2);
+    this.currentDirection = "down";
   }
 
   /**
    * Moves the tank left.
    */
   public moveLeft(): void {
-    this.moveTank(-25, 0, 0);
+    this.moveTank(-25, 0, Math.PI);
+    this.sprite.scale.y = -1;
+    this.sprite.width = 77;
+    this.sprite.height = 77;
+    this.currentDirection = "left";
   }
 
   /**
@@ -77,6 +90,10 @@ export class Tank {
    */
   public moveRight(): void {
     this.moveTank(25, 0, 0);
+    this.sprite.scale.y = 1;
+    this.sprite.width = 77;
+    this.sprite.height = 77;
+    this.currentDirection = "right";
   }
 
   /**
@@ -108,8 +125,20 @@ export class Tank {
    */
   private createBullets(): void {
     for (let i = 0; i < this.bulletCount; i++) {
-      const offsetY = (i - (this.bulletCount - 1) / 2) * 10; // Adjust y position for each bullet
-      const bullet = new Bullet(this.app, this.sprite.x, this.sprite.y + offsetY, this.damage, this.sprite.rotation, this.game);
+      let offsetX = 0;
+      let offsetY = (i - (this.bulletCount - 1) / 2) * 10; // Adjust y position for each bullet
+      if (["up", "down"].includes(this.currentDirection)) {
+        offsetX = (i - (this.bulletCount - 1) / 2) * 10; // Adjust x position for each bullet
+        offsetY = 0;
+      }
+      const bullet = new Bullet(
+        this.app,
+        this.sprite.x + offsetX,
+        this.sprite.y + offsetY,
+        this.damage,
+        this.sprite.rotation,
+        this.game
+      );
       this.bullets.push(bullet);
     }
   }

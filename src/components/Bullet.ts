@@ -34,7 +34,7 @@ export class Bullet {
    * @returns PIXI.Sprite - The created bullet sprite.
    */
   private createSprite(x: number, y: number, rotation: number): PIXI.Sprite {
-    const sprite = PIXI.Sprite.from("assets/bullet.png");
+    const sprite = PIXI.Sprite.from("assets/images/bullet.png");
     sprite.anchor.set(0.5);
     sprite.width = 22;
     sprite.height = 22;
