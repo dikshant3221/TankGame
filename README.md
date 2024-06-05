@@ -18,7 +18,7 @@ This project is a simple tank game developed using Pixi.js. It features a map wi
 ## Installation
 
 1. **Clone the repository:**
-git clone git@github.com/your-repository.git
+git clone https://github.com/dikshant3221/TankGame.git
 2. **Navigate to the project directory:**
 cd pixijs-tank-game
 3.**Install dependencies**
